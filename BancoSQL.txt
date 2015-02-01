@@ -1,0 +1,67 @@
+Create table `alunos` (
+	`id` Int NOT NULL AUTO_INCREMENT,
+	`turma_id` Int NOT NULL,
+	`matricula` Int NOT NULL,
+	`nome` Varchar(255) NOT NULL,
+	`rg` Varchar(255) NOT NULL,
+	`data_nasc` Varchar(255) NOT NULL,
+	`sexo` Char(1) NOT NULL,
+	`endereco` Varchar(255) NOT NULL,
+	`bairro` Varchar(255) NOT NULL,
+	`cidade` Varchar(255) NOT NULL,
+	`fone` Varchar(255) NOT NULL,
+	`foto` Varchar(255),
+	UNIQUE (`matricula`),
+ Primary Key (`id`));
+
+Create table `entrada` (
+	`id` Int NOT NULL AUTO_INCREMENT,
+	`aluno_id` Int NOT NULL,
+	`data` Date NOT NULL,
+	`hora` Time NOT NULL,
+ Primary Key (`id`,`aluno_id`));
+
+Create table `saida` (
+	`id` Int NOT NULL AUTO_INCREMENT,
+	`aluno_id` Int NOT NULL,
+	`data` Date NOT NULL,
+	`hora` Time NOT NULL,
+ Primary Key (`id`,`aluno_id`));
+
+Create table `turmas` (
+	`id` Int NOT NULL AUTO_INCREMENT,
+	`turma` Varchar(255) NOT NULL,
+	`turno` Varchar(50) NOT NULL,
+ Primary Key (`id`));
+
+Create table `usuario` (
+	`id_usuario` Int NOT NULL AUTO_INCREMENT,
+	`login` Varchar(255) NOT NULL,
+	`senha` Varchar(255) NOT NULL,
+	`usuario` Varchar(255) NOT NULL,
+ Primary Key (`id_usuario`));
+
+Create table `empresas` (
+	`id` Int NOT NULL AUTO_INCREMENT,
+	`Nome` Varchar(100) NOT NULL,
+	`RazaoSocial` Varchar(100),
+	`Email` Varchar(50),
+	`home` Varchar(50),
+	`cnpj` Varchar(50),
+	`endereco` Varchar(100),
+	`estado` Char(2),
+	`cidade` Varchar(50),
+	`bairro` Varchar(50),
+	`cep` Varchar(20),
+	`fone1` Varchar(20),
+	`fone2` Varchar(20),
+	`fax` Varchar(20),
+	`Nportaria` Varchar(50),
+	`DataPuclicacao` Date,
+	`Media` Varchar(20),
+ Primary Key (`id`));
+
+
+Alter table `saida` add Foreign Key (`aluno_id`) references `alunos` (`id`) on delete cascade on update cascade;
+Alter table `entrada` add Foreign Key (`aluno_id`) references `alunos` (`id`) on delete cascade on update cascade;
+Alter table `alunos` add Foreign Key (`turma_id`) references `turmas` (`id`) on delete  restrict on update cascade;
