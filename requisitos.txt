@@ -1,0 +1,19 @@
+Nao tem muito segredo nao o sistema
+O sistema vai ficar no pc no patio da escola
+Sempre na tela de frequencia
+Vai ficar ligado um leitor de cartao magnético
+E quando o aluno chegar ele vai passar o cartao
+A tela carrega os dados dele por alguns segundos
+E salva a hora e data que ele efetuou a entrada
+O aluno so podo efetuar 1 entrada e 1 saída no mesmo dia
+Sendo que a saida  ao é obrigatório
+Ai na tela relatório o adm tem a opcao de visualizar o dia que quiser a frequência dos alunos
+Por  nome e por turma
+Com a opcao de imprimir
+Se o pai do aluno pedir na escola a frequência dele
+O adm imprimi estila caderneta
+Estilo
+Mais ou menos isso
+O aluno  ao pode efetuar a entrada e a saida em seguida
+Tem q haver o tempo tipo 30 minutos
+Pra poder efetuar a saida
