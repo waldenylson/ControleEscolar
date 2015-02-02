@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, DBCtrls, DB, StdCtrls, Mask, ImgList, ActnList,
   XPStyleActnCtrls, ActnMan, ToolWin, ActnCtrls, ActnMenus, ExtCtrls, ExtDlgs,
-  Jpeg, PNGImage, Buttons;
+  Jpeg, PNGImage, Buttons, System.Actions;
 
 type
   TfrmGerenciarCadastroAlunos = class(TForm)

@@ -6,8 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ToolWin, ActnMan, ActnCtrls, ActnMenus, ImgList, ActnList,
   XPStyleActnCtrls, ExtCtrls, DBCtrls, DB, ADODB, StdCtrls, Mask, ComCtrls,
-  Menus, ZAbstractRODataset, ZAbstractDataset, ZDataset, ZAbstractTable, UMensagemConfirm,
-  Buttons;
+  Menus, UMensagemConfirm,
+  Buttons, System.Actions;
 
 type
   TfrmCadUsusarios = class(TForm)
@@ -78,27 +78,27 @@ end;
 
 procedure TfrmCadUsusarios.addExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableUsuarios.Insert;
+  frmDataModule.tbUsuarios.Insert;
 end;
 
 procedure TfrmCadUsusarios.cancelExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableUsuarios.Cancel;
+  frmDataModule.tbUsuarios.Cancel;
 end;
 
 procedure TfrmCadUsusarios.delExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableUsuarios.Delete;
+  frmDataModule.tbUsuarios.Delete;
 end;
 
 procedure TfrmCadUsusarios.editExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableUsuarios.Edit;
+  frmDataModule.tbUsuarios.Edit;
 end;
 
 procedure TfrmCadUsusarios.fistExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableUsuarios.First;
+  frmDataModule.tbUsuarios.First;
 end;
 
 procedure TfrmCadUsusarios.FormKeyDown(Sender: TObject; var Key: Word;
@@ -110,27 +110,27 @@ end;
 
 procedure TfrmCadUsusarios.lastExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableUsuarios.Last;
+  frmDataModule.tbUsuarios.Last;
 end;
 
 procedure TfrmCadUsusarios.nextExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableUsuarios.Next;
+  frmDataModule.tbUsuarios.Next;
 end;
 
 procedure TfrmCadUsusarios.postExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableUsuarios.Post;
+  frmDataModule.tbUsuarios.Post;
 end;
 
 procedure TfrmCadUsusarios.prevExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableUsuarios.Prior;
+  frmDataModule.tbUsuarios.Prior;
 end;
 
 procedure TfrmCadUsusarios.refreshExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableUsuarios.Refresh;
+  frmDataModule.tbUsuarios.Refresh;
 end;
 
 procedure TfrmCadUsusarios.sairExecute(Sender: TObject);

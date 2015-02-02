@@ -8,7 +8,7 @@ uses
   FMTBcd, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error,
   FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, UniProvider, MySQLUniProvider, MemDS, DBAccess, Uni;
 
 type
   TfrmDataModule = class(TDataModule)
@@ -71,17 +71,66 @@ type
     IBQueryAutoCompletenome: TIBStringField;
     DataSourceAutoComplete: TDataSource;
     IBQueryAutoCompletematricula: TIntegerField;
-    FDConnection1: TFDConnection;
+    UniConnection: TUniConnection;
+    tbAlunos: TUniTable;
+    tbTurmas: TUniTable;
+    tbUsuarios: TUniTable;
+    tbEmpresas: TUniTable;
+    tbFeriados: TUniTable;
+    MySQLProvider: TMySQLUniProvider;
+    tbAlunosid: TIntegerField;
+    tbAlunosturma_id: TIntegerField;
+    tbAlunosmatricula: TIntegerField;
+    tbAlunosnome: TStringField;
+    tbAlunosrg: TStringField;
+    tbAlunosdata_nasc: TStringField;
+    tbAlunossexo: TStringField;
+    tbAlunosendereco: TStringField;
+    tbAlunosbairro: TStringField;
+    tbAlunoscidade: TStringField;
+    tbAlunosfone: TStringField;
+    tbAlunosfoto: TStringField;
+    tbTurmasid: TIntegerField;
+    tbTurmasturma: TStringField;
+    tbTurmasturno: TStringField;
+    tbUsuariosid_usuario: TIntegerField;
+    tbUsuarioslogin: TStringField;
+    tbUsuariossenha: TStringField;
+    tbUsuariosusuario: TStringField;
+    tbEmpresasid: TIntegerField;
+    tbEmpresasNome: TStringField;
+    tbEmpresasRazaoSocial: TStringField;
+    tbEmpresasEmail: TStringField;
+    tbEmpresashome: TStringField;
+    tbEmpresascnpj: TStringField;
+    tbEmpresasendereco: TStringField;
+    tbEmpresasestado: TStringField;
+    tbEmpresascidade: TStringField;
+    tbEmpresasbairro: TStringField;
+    tbEmpresascep: TStringField;
+    tbEmpresasfone1: TStringField;
+    tbEmpresasfone2: TStringField;
+    tbEmpresasfax: TStringField;
+    tbEmpresasNportaria: TStringField;
+    tbEmpresasDataPuclicacao: TDateField;
+    tbEmpresasMedia: TStringField;
+    QueryLogin: TUniQuery;
+    QueryMatricula: TUniQuery;
+    QueryLoginid_usuario: TIntegerField;
+    QueryLoginlogin: TStringField;
+    QueryLoginsenha: TStringField;
+    QueryLoginusuario: TStringField;
+    QueryMatriculaqtd: TLargeintField;
     procedure IBTableAlunosAfterCancel(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure IBTableAlunosBeforeDelete(DataSet: TDataSet);
     procedure IBTableTurmasBeforeDelete(DataSet: TDataSet);
     procedure IBTableAlunosAfterPost(DataSet: TDataSet);
     procedure IBTableTurmasAfterPost(DataSet: TDataSet);
-    procedure IBTableUsuariosAfterPost(DataSet: TDataSet);
     procedure IBTableAlunosBeforePost(DataSet: TDataSet);
     procedure IBTableTurmasBeforePost(DataSet: TDataSet);
-    procedure IBTableUsuariosBeforePost(DataSet: TDataSet);
+    procedure tbUsuariosAfterPost(DataSet: TDataSet);
+    procedure tbUsuariosBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
     var semaforo: Integer;
@@ -101,7 +150,7 @@ uses FormGerenciarCadastroAlunos;
 procedure TfrmDataModule.DataModuleCreate(Sender: TObject);
 var iniFile: TIniFile;
 begin
-  try
+  {try
     iniFile := TIniFile.Create(ExtractFileDir(Application.exeName) + '\Setings.ini');
 
     with self.IBDatabase do
@@ -126,7 +175,7 @@ begin
   except
     ShowMessage('Ocorreu um Erro ao Tentar Conectar com o' + #13 + 'Servidor de Banco de Dados!' + #13 + 'Entre em contato com o suporte técnico!');
     Application.Terminate;
-  end;
+  end;  }
 end;
 
 procedure TfrmDataModule.IBTableAlunosAfterCancel(DataSet: TDataSet);
@@ -216,18 +265,18 @@ begin
   else semaforo := 0;
 end;
 
-procedure TfrmDataModule.IBTableUsuariosAfterPost(DataSet: TDataSet);
+procedure TfrmDataModule.tbUsuariosAfterPost(DataSet: TDataSet);
 begin
-  if semaforo = 1 then
+   if semaforo = 1 then
   begin
-    IBTableUsuarios.Refresh;
-    IBTableUsuarios.Last;
+    tbUsuarios.Refresh;
+    tbUsuarios.Last;
   end;
 end;
 
-procedure TfrmDataModule.IBTableUsuariosBeforePost(DataSet: TDataSet);
+procedure TfrmDataModule.tbUsuariosBeforePost(DataSet: TDataSet);
 begin
-  if IBTableUsuarios.State = dsInsert then
+  if tbUsuarios.State = dsInsert then
     semaforo := 1
   else semaforo := 0;
 end;

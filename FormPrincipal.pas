@@ -4,29 +4,32 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, dxGDIPlusClasses, ExtCtrls, Menus, ComCtrls, DtsExcel;
+  Dialogs, ExtCtrls, Menus, ComCtrls, DtsExcel, System.Actions, Vcl.ActnList,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, Vcl.ToolWin, Vcl.ActnCtrls,
+  Vcl.ActnMenus;
 
 type
   TfrmPrincipal = class(TForm)
-    Panel1: TPanel;
-    Image1: TImage;
-    cadastros: TImage;
-    relatorios: TImage;
-    login: TImage;
-    Image6: TImage;
     TrayIcon1: TTrayIcon;
     StatusBar1: TStatusBar;
     Timer1: TTimer;
     BalloonHint1: TBalloonHint;
+    cadastros: TImage;
+    relatorios: TImage;
     configuracoes: TImage;
+    login: TImage;
+    ActionMainMenuBar1: TActionMainMenuBar;
+    ActionManager1: TActionManager;
+    mnuAlunosNovo: TAction;
+    Action1: TAction;
     procedure Timer1Timer(Sender: TObject);
-    procedure cadastrosClick(Sender: TObject);
     procedure loginClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure relatoriosClick(Sender: TObject);
     procedure configuracoesClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure mnuAlunosNovoExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,21 +41,11 @@ var
 
 implementation
 
-uses FormSelecionaTela, FormLogin, UMensagemConfirm, FormCadEmpresas,
-  FormSelecionaTela2, FormExtrairRelatorios;
+uses FormLogin, UMensagemConfirm, FormCadEmpresas,
+  FormSelecionaTela2, FormCadUsuarios,
+  FormGerenciarCadastroAlunos;
 
 {$R *.dfm}
-
-procedure TfrmPrincipal.cadastrosClick(Sender: TObject);
-begin
-  frmSelecionaTela := TfrmSelecionaTela.Create(Application);
-  try
-    frmSelecionaTela.ShowModal;
-  finally
-    frmSelecionaTela.Release;
-    frmSelecionaTela.Free;
-  end;
-end;
 
 procedure TfrmPrincipal.configuracoesClick(Sender: TObject);
 begin
@@ -104,16 +97,20 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.mnuAlunosNovoExecute(Sender: TObject);
+begin
+  frmGerenciarCadastroAlunos := TfrmGerenciarCadastroAlunos.Create(Application);
+  try
+    frmGerenciarCadastroAlunos.ShowModal;
+  finally
+    frmGerenciarCadastroAlunos.Release;
+    frmGerenciarCadastroAlunos.Free;
+  end;
+end;
+
 procedure TfrmPrincipal.relatoriosClick(Sender: TObject);
 begin
-  //Application.MessageBox('Funcionalidade em Desenvolvimento!', ' Atenção!', mb_IconInformation);
-  frmExtrairRelatorios := TfrmExtrairRelatorios.Create(Self);
-  try
-    frmExtrairRelatorios.ShowModal;
-  finally
-    frmExtrairRelatorios.Release;
-    frmExtrairRelatorios.Free;
-  end;
+  Application.MessageBox('Funcionalidade em Desenvolvimento!', ' Atenção!', mb_IconInformation);
 end;
 
 procedure TfrmPrincipal.Timer1Timer(Sender: TObject);

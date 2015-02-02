@@ -43,13 +43,14 @@ object frmGerenciarCadastroAlunos: TfrmGerenciarCadastroAlunos
     Top = 0
     Width = 678
     Height = 23
+    UseSystemFont = False
     ActionManager = ActionManager1
     Caption = 'ActionMainMenuBar1'
-    ColorMap.HighlightColor = 15921906
+    ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = 15921906
+    ColorMap.UnusedColor = clWhite
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clMenuText
+    Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
@@ -290,7 +291,6 @@ object frmGerenciarCadastroAlunos: TfrmGerenciarCadastroAlunos
     Width = 105
     Height = 36
     Caption = '&Pesquisar'
-    DoubleBuffered = True
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       08000000000000010000120B0000120B00000001000000000000FFEDCC009D92
@@ -334,7 +334,6 @@ object frmGerenciarCadastroAlunos: TfrmGerenciarCadastroAlunos
       135116203B1A4E304074747474747404715342002132456C1574747474747427
       5D642A222637706D2874747474747474100A494A2B1F17057474747474747474
       743D67551C480174747474747474747474747474747474747474}
-    ParentDoubleBuffered = False
     TabOrder = 4
     OnClick = btnSearchAlunosClick
   end
@@ -344,7 +343,6 @@ object frmGerenciarCadastroAlunos: TfrmGerenciarCadastroAlunos
     Width = 78
     Height = 36
     Caption = '&V'#225' Para'
-    DoubleBuffered = True
     Glyph.Data = {
       F6060000424DF606000000000000360000002800000018000000180000000100
       180000000000C0060000120B0000120B00000000000000000000FF00FFFF00FF
@@ -402,7 +400,6 @@ object frmGerenciarCadastroAlunos: TfrmGerenciarCadastroAlunos
       FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
       FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
       00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-    ParentDoubleBuffered = False
     TabOrder = 5
     OnClick = BitBtn1Click
   end
@@ -569,7 +566,7 @@ object frmGerenciarCadastroAlunos: TfrmGerenciarCadastroAlunos
     Left = 544
     Top = 328
     Bitmap = {
-      494C01010E001300040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C01010E001300080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1101,10 +1098,11 @@ object frmGerenciarCadastroAlunos: TfrmGerenciarCadastroAlunos
       C003C003C003C003800180018001800180018001800180010000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000080018001800180018001800180018001C003C003C003C003
-      E007E007E007E007F01FF01FF01FF01F}
+      E007E007E007E007F01FF01FF01FF01F00000000000000000000000000000000
+      000000000000}
   end
   object DataSource1: TDataSource
-    DataSet = frmDataModule.IBTableAlunos
+    DataSet = frmDataModule.tbAlunos
     Left = 480
     Top = 328
   end

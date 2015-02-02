@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Mask, DBCtrls, ComCtrls, DB, ToolWin, ActnMan, ActnCtrls,
-  ActnMenus, ImgList, ActnList, XPStyleActnCtrls, ExtCtrls;
+  ActnMenus, ImgList, ActnList, XPStyleActnCtrls, ExtCtrls, System.Actions;
 
 type
   TfrmGerenciarCadastroTurmas = class(TForm)

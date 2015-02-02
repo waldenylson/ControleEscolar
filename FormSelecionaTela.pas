@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, dxGDIPlusClasses, ExtCtrls;
+  Dialogs, StdCtrls, ExtCtrls;
 
 type
   TfrmSelecionaTela = class(TForm)
@@ -12,7 +12,6 @@ type
     Image2: TImage;
     Label1: TLabel;
     Label2: TLabel;
-    procedure Image1Click(Sender: TObject);
     procedure Image2Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
@@ -35,17 +34,6 @@ procedure TfrmSelecionaTela.FormKeyDown(Sender: TObject; var Key: Word;
 begin
   if key = VK_ESCAPE then
     self.Close;
-end;
-
-procedure TfrmSelecionaTela.Image1Click(Sender: TObject);
-begin
-  frmGerenciarCadastroAlunos := TfrmGerenciarCadastroAlunos.Create(Application);
-  try
-    frmGerenciarCadastroAlunos.ShowModal;
-  finally
-    frmGerenciarCadastroAlunos.Release;
-    frmGerenciarCadastroAlunos.Free;
-  end;
 end;
 
 procedure TfrmSelecionaTela.Image2Click(Sender: TObject);

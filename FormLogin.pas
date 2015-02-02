@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, dxGDIPlusClasses, ExtCtrls, StdCtrls, Buttons, ShellAPI;
+  Dialogs, ExtCtrls, StdCtrls, Buttons, ShellAPI;
 
 type
   TfrmLogin = class(TForm)
@@ -153,15 +153,15 @@ end;
 
 function TfrmLogin.verificaLogin: bool;
 begin
-  frmDataModule.IBQueryLogin.Active := false;
+  frmDataModule.tbUsuarios.Active := false;
 
-  frmDataModule.IBQueryLogin.SQL.Clear;
-  frmDataModule.IBQueryLogin.SQL.Add('SELECT * FROM "usuario" u WHERE( (u."login" = :usuario) AND ("senha" = :senha) )');
-  frmDataModule.IBQueryLogin.ParamByName('usuario').AsString := txtUser.Text;
-  frmDataModule.IBQueryLogin.ParamByName('senha').AsString   := txtPass.Text;
-  frmDataModule.IBQueryLogin.Active := true;
+  frmDataModule.QueryLogin.SQL.Clear;
+  frmDataModule.QueryLogin.SQL.Add('SELECT * FROM "usuario" u WHERE( (u."login" = :usuario) AND ("senha" = :senha) )');
+  frmDataModule.QueryLogin.ParamByName('usuario').AsString := txtUser.Text;
+  frmDataModule.QueryLogin.ParamByName('senha').AsString   := txtPass.Text;
+  frmDataModule.QueryLogin.Active := true;
 
-  if frmDataModule.IBQueryLoginlogin.Value = '' then
+  if frmDataModule.QueryLoginlogin.Value = '' then
     Result := false
   else
     Result := true;
