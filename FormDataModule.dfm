@@ -4,13 +4,13 @@ object frmDataModule: TfrmDataModule
   Height = 530
   Width = 1053
   object IBDatabase: TIBDatabase
-    Connected = True
     DatabaseName = 'DATABASE/Banco.fdb'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
     LoginPrompt = False
     DefaultTransaction = IBTransaction
+    ServerType = 'IBServer'
     Left = 48
     Top = 8
   end
@@ -21,7 +21,8 @@ object frmDataModule: TfrmDataModule
     AfterPost = IBTableAlunosAfterPost
     BeforeDelete = IBTableAlunosBeforeDelete
     BeforePost = IBTableAlunosBeforePost
-    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
     FieldDefs = <
       item
         Name = 'id'
@@ -101,6 +102,7 @@ object frmDataModule: TfrmDataModule
       end>
     StoreDefs = True
     TableName = 'alunos'
+    UniDirectional = False
     Left = 48
     Top = 112
     object IBTableAlunosid: TIntegerField
@@ -153,7 +155,6 @@ object frmDataModule: TfrmDataModule
     end
   end
   object IBTransaction: TIBTransaction
-    Active = True
     DefaultDatabase = IBDatabase
     Left = 48
     Top = 56
@@ -164,7 +165,8 @@ object frmDataModule: TfrmDataModule
     AfterPost = IBTableTurmasAfterPost
     BeforeDelete = IBTableTurmasBeforeDelete
     BeforePost = IBTableTurmasBeforePost
-    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
     FieldDefs = <
       item
         Name = 'id'
@@ -191,6 +193,7 @@ object frmDataModule: TfrmDataModule
       end>
     StoreDefs = True
     TableName = 'turmas'
+    UniDirectional = False
     Left = 48
     Top = 160
     object IBTableTurmasid: TIntegerField
@@ -215,7 +218,9 @@ object frmDataModule: TfrmDataModule
   object IBQueryLogin: TIBQuery
     Database = IBDatabase
     Transaction = IBTransaction
-    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
     SQL.Strings = (
       'SELECT * FROM "usuario"')
     Left = 48
@@ -251,7 +256,8 @@ object frmDataModule: TfrmDataModule
     Transaction = IBTransaction
     AfterPost = IBTableUsuariosAfterPost
     BeforePost = IBTableUsuariosBeforePost
-    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
     FieldDefs = <
       item
         Name = 'id_usuario'
@@ -284,6 +290,7 @@ object frmDataModule: TfrmDataModule
       end>
     StoreDefs = True
     TableName = 'usuario'
+    UniDirectional = False
     Left = 48
     Top = 208
     object IBTableUsuariosid_usuario: TIntegerField
@@ -313,7 +320,8 @@ object frmDataModule: TfrmDataModule
   object IBTableEmpresas: TIBTable
     Database = IBDatabase
     Transaction = IBTransaction
-    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
     FieldDefs = <
       item
         Name = 'id'
@@ -409,6 +417,7 @@ object frmDataModule: TfrmDataModule
       end>
     StoreDefs = True
     TableName = 'empresas'
+    UniDirectional = False
     Left = 48
     Top = 264
     object IBTableEmpresasid: TIntegerField
@@ -483,7 +492,9 @@ object frmDataModule: TfrmDataModule
   object IBQueryMatricula: TIBQuery
     Database = IBDatabase
     Transaction = IBTransaction
-    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
     SQL.Strings = (
       'SELECT COUNT(*) as "qtd" FROM "alunos"')
     Left = 48
@@ -500,6 +511,8 @@ object frmDataModule: TfrmDataModule
     AfterPost = IBTableAlunosAfterPost
     BeforeDelete = IBTableAlunosBeforeDelete
     BeforePost = IBTableAlunosBeforePost
+    BufferChunks = 1000
+    CachedUpdates = False
     FieldDefs = <
       item
         Name = 'data'
@@ -519,6 +532,7 @@ object frmDataModule: TfrmDataModule
       end>
     StoreDefs = True
     TableName = 'feriados'
+    UniDirectional = False
     Left = 184
     Top = 192
     object IBTableFeriadosdata: TDateTimeField
@@ -533,7 +547,9 @@ object frmDataModule: TfrmDataModule
   object IBQueryAutoComplete: TIBQuery
     Database = IBDatabase
     Transaction = IBTransaction
-    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
     SQL.Strings = (
       'select "a"."id", "a"."nome", "a"."matricula" from "alunos" "a"')
     Left = 376
@@ -560,5 +576,16 @@ object frmDataModule: TfrmDataModule
     DataSet = IBQueryAutoComplete
     Left = 376
     Top = 368
+  end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'Database=controle_escolar'
+      'User_Name=root'
+      'Password=123456'
+      'Port=3308'
+      'DriverID=MySQL')
+    LoginPrompt = False
+    Left = 144
+    Top = 8
   end
 end

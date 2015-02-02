@@ -5,7 +5,10 @@ interface
 uses
   SysUtils, Classes, DB, IBCustomDataSet, IBDatabase, IBTable, Dialogs, Forms,
   IBQuery, inifiles, UMensagemConfirm, Windows, WideStrings,
-  FMTBcd;
+  FMTBcd, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error,
+  FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
+  FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef,
+  FireDAC.Comp.Client;
 
 type
   TfrmDataModule = class(TDataModule)
@@ -68,6 +71,7 @@ type
     IBQueryAutoCompletenome: TIBStringField;
     DataSourceAutoComplete: TDataSource;
     IBQueryAutoCompletematricula: TIntegerField;
+    FDConnection1: TFDConnection;
     procedure IBTableAlunosAfterCancel(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure IBTableAlunosBeforeDelete(DataSet: TDataSet);
