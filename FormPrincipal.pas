@@ -20,6 +20,7 @@ type
     login: TImage;
     Image1: TImage;
     Image2: TImage;
+    Image3: TImage;
     procedure Timer1Timer(Sender: TObject);
     procedure loginClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -28,6 +29,7 @@ type
     procedure configuracoesClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure cadastrosClick(Sender: TObject);
+    procedure Image3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,7 +43,7 @@ implementation
 
 uses FormLogin, UMensagemConfirm, FormCadEmpresas,
   FormSelecionaTela2, FormCadUsuarios,
-  FormGerenciarCadastroAlunos;
+  FormGerenciarCadastroAlunos, FormGerenciarCadastroTurmas;
 
 {$R *.dfm}
 
@@ -91,6 +93,17 @@ procedure TfrmPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
 begin
   if key = VK_ESCAPE then
     self.Close;
+end;
+
+procedure TfrmPrincipal.Image3Click(Sender: TObject);
+begin
+  frmGerenciarCadastroTurmas := TfrmGerenciarCadastroTurmas.Create(Application);
+  try
+    frmGerenciarCadastroTurmas.ShowModal;
+  finally
+    frmGerenciarCadastroTurmas.Release;
+    frmGerenciarCadastroTurmas.Free;
+  end;
 end;
 
 procedure TfrmPrincipal.loginClick(Sender: TObject);

@@ -16,6 +16,7 @@ object frmVaParaAluno: TfrmVaParaAluno
   Position = poOwnerFormCenter
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  OnKeyDown = txtMatriculaKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -44,5 +45,6 @@ object frmVaParaAluno: TfrmVaParaAluno
     NumGlyphs = 2
     TabOrder = 1
     OnClick = BitBtn1Click
+    OnKeyDown = txtMatriculaKeyDown
   end
 end
