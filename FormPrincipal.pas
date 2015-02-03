@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, Menus, ComCtrls, DtsExcel, System.Actions, Vcl.ActnList,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, Vcl.ToolWin, Vcl.ActnCtrls,
-  Vcl.ActnMenus;
+  Vcl.ActnMenus, Vcl.Imaging.pngimage, Vcl.Imaging.jpeg;
 
 type
   TfrmPrincipal = class(TForm)
@@ -18,10 +18,8 @@ type
     relatorios: TImage;
     configuracoes: TImage;
     login: TImage;
-    ActionMainMenuBar1: TActionMainMenuBar;
-    ActionManager1: TActionManager;
-    mnuAlunosNovo: TAction;
-    Action1: TAction;
+    Image1: TImage;
+    Image2: TImage;
     procedure Timer1Timer(Sender: TObject);
     procedure loginClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -29,7 +27,7 @@ type
     procedure relatoriosClick(Sender: TObject);
     procedure configuracoesClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure mnuAlunosNovoExecute(Sender: TObject);
+    procedure cadastrosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,6 +44,17 @@ uses FormLogin, UMensagemConfirm, FormCadEmpresas,
   FormGerenciarCadastroAlunos;
 
 {$R *.dfm}
+
+procedure TfrmPrincipal.cadastrosClick(Sender: TObject);
+begin
+  frmGerenciarCadastroAlunos := TfrmGerenciarCadastroAlunos.Create(Application);
+  try
+    frmGerenciarCadastroAlunos.ShowModal;
+  finally
+    frmGerenciarCadastroAlunos.Release;
+    frmGerenciarCadastroAlunos.Free;
+  end;
+end;
 
 procedure TfrmPrincipal.configuracoesClick(Sender: TObject);
 begin
@@ -94,17 +103,6 @@ begin
   finally
     frmLogin.Release;
     frmLogin.Free;
-  end;
-end;
-
-procedure TfrmPrincipal.mnuAlunosNovoExecute(Sender: TObject);
-begin
-  frmGerenciarCadastroAlunos := TfrmGerenciarCadastroAlunos.Create(Application);
-  try
-    frmGerenciarCadastroAlunos.ShowModal;
-  finally
-    frmGerenciarCadastroAlunos.Release;
-    frmGerenciarCadastroAlunos.Free;
   end;
 end;
 

@@ -12,65 +12,9 @@ uses
 
 type
   TfrmDataModule = class(TDataModule)
-    IBDatabase: TIBDatabase;
-    IBTableAlunos: TIBTable;
-    IBTransaction: TIBTransaction;
-    IBTableTurmas: TIBTable;
     DataSourceListTurmas: TDataSource;
-    IBQueryLogin: TIBQuery;
-    IBQueryLoginid_usuario: TIntegerField;
-    IBQueryLoginlogin: TIBStringField;
-    IBQueryLoginsenha: TIBStringField;
-    IBQueryLoginusuario: TIBStringField;
-    IBTableUsuarios: TIBTable;
-    IBTableTurmasid: TIntegerField;
-    IBTableTurmasturma: TIBStringField;
-    IBTableTurmasturno: TIBStringField;
-    IBTableUsuariosid_usuario: TIntegerField;
-    IBTableUsuarioslogin: TIBStringField;
-    IBTableUsuariossenha: TIBStringField;
-    IBTableUsuariosusuario: TIBStringField;
-    IBTableAlunosid: TIntegerField;
-    IBTableAlunosturma_id: TIntegerField;
-    IBTableAlunosmatricula: TIntegerField;
-    IBTableAlunosnome: TIBStringField;
-    IBTableAlunosrg: TIBStringField;
-    IBTableAlunossexo: TIBStringField;
-    IBTableAlunosendereco: TIBStringField;
-    IBTableAlunosbairro: TIBStringField;
-    IBTableAlunoscidade: TIBStringField;
-    IBTableAlunosfone: TIBStringField;
-    IBTableAlunosfoto: TIBStringField;
     DataSourceEmpresas: TDataSource;
-    IBTableEmpresas: TIBTable;
-    IBTableEmpresasid: TIntegerField;
-    IBTableEmpresasNome: TIBStringField;
-    IBTableEmpresasRazaoSocial: TIBStringField;
-    IBTableEmpresasEmail: TIBStringField;
-    IBTableEmpresashome: TIBStringField;
-    IBTableEmpresascnpj: TIBStringField;
-    IBTableEmpresasendereco: TIBStringField;
-    IBTableEmpresasestado: TIBStringField;
-    IBTableEmpresascidade: TIBStringField;
-    IBTableEmpresasbairro: TIBStringField;
-    IBTableEmpresascep: TIBStringField;
-    IBTableEmpresasfone1: TIBStringField;
-    IBTableEmpresasfone2: TIBStringField;
-    IBTableEmpresasfax: TIBStringField;
-    IBTableEmpresasNportaria: TIBStringField;
-    IBTableEmpresasDataPuclicacao: TDateField;
-    IBTableEmpresasMedia: TIBStringField;
-    IBQueryMatricula: TIBQuery;
-    IBTableFeriados: TIBTable;
-    IBTableAlunosdata_nasc: TDateField;
-    IBTableFeriadosdata: TDateTimeField;
-    IBTableFeriadosdescricao: TIBStringField;
-    IBQueryMatriculaqtd: TIntegerField;
-    IBQueryAutoComplete: TIBQuery;
-    IBQueryAutoCompleteid: TIntegerField;
-    IBQueryAutoCompletenome: TIBStringField;
     DataSourceAutoComplete: TDataSource;
-    IBQueryAutoCompletematricula: TIntegerField;
     UniConnection: TUniConnection;
     tbAlunos: TUniTable;
     tbTurmas: TUniTable;
@@ -121,16 +65,22 @@ type
     QueryLoginsenha: TStringField;
     QueryLoginusuario: TStringField;
     QueryMatriculaqtd: TLargeintField;
-    procedure IBTableAlunosAfterCancel(DataSet: TDataSet);
+    QueryAutoComplete: TUniQuery;
+    QueryAutoCompleteid: TIntegerField;
+    QueryAutoCompletenome: TStringField;
+    QueryAutoCompletematricula: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
-    procedure IBTableAlunosBeforeDelete(DataSet: TDataSet);
-    procedure IBTableTurmasBeforeDelete(DataSet: TDataSet);
-    procedure IBTableAlunosAfterPost(DataSet: TDataSet);
-    procedure IBTableTurmasAfterPost(DataSet: TDataSet);
-    procedure IBTableAlunosBeforePost(DataSet: TDataSet);
-    procedure IBTableTurmasBeforePost(DataSet: TDataSet);
     procedure tbUsuariosAfterPost(DataSet: TDataSet);
     procedure tbUsuariosBeforePost(DataSet: TDataSet);
+    procedure tbAlunosAfterPost(DataSet: TDataSet);
+    procedure tbAlunosAfterCancel(DataSet: TDataSet);
+    procedure tbAlunosBeforeDelete(DataSet: TDataSet);
+    procedure tbAlunosBeforePost(DataSet: TDataSet);
+    procedure tbTurmasAfterPost(DataSet: TDataSet);
+    procedure tbTurmasBeforeDelete(DataSet: TDataSet);
+    procedure tbTurmasBeforePost(DataSet: TDataSet);
+    procedure tbUsuariosBeforeDelete(DataSet: TDataSet);
+    procedure tbEmpresasBeforeDelete(DataSet: TDataSet);
   private
     { Private declarations }
     var semaforo: Integer;
@@ -178,27 +128,27 @@ begin
   end;  }
 end;
 
-procedure TfrmDataModule.IBTableAlunosAfterCancel(DataSet: TDataSet);
+procedure TfrmDataModule.tbAlunosAfterCancel(DataSet: TDataSet);
 begin
   frmGerenciarCadastroAlunos.foto.Picture := nil;
 end;
 
-procedure TfrmDataModule.IBTableAlunosAfterPost(DataSet: TDataSet);
+procedure TfrmDataModule.tbAlunosAfterPost(DataSet: TDataSet);
 begin
   if semaforo = 1 then
   begin
-    IBTableAlunos.Refresh;
-    IBTableAlunos.Last;
+    tbAlunos.Refresh;
+    tbAlunos.Last;
   end;
 end;
 
-procedure TfrmDataModule.IBTableAlunosBeforeDelete(DataSet: TDataSet);
+procedure TfrmDataModule.tbAlunosBeforeDelete(DataSet: TDataSet);
 begin
   If ( mensagem('Deseja mesmo excluir o Registro?') <> Idyes ) then
     Abort;
 end;
 
-procedure TfrmDataModule.IBTableAlunosBeforePost(DataSet: TDataSet);
+procedure TfrmDataModule.tbAlunosBeforePost(DataSet: TDataSet);
 begin
   if frmGerenciarCadastroAlunos.DBEdit6.Text = '' then
   begin
@@ -216,9 +166,9 @@ begin
     Abort;
   end;
 
-  if IBTableAlunos.State = dsInsert then  // Verifica se a matricula existe somente quando inserindo um novo registro  ----
+  if tbAlunos.State = dsInsert then  // Verifica se a matricula existe somente quando inserindo um novo registro  ----
   begin
-    with IBQueryMatricula do
+    with QueryMatricula do
     begin
       Active := false;
 
@@ -229,7 +179,7 @@ begin
       Active := true;
 
 
-      if IBQueryMatriculaqtd.Value > 0 then
+      if QueryMatriculaqtd.Value > 0 then
       begin
         Application.MessageBox('Número de matrícula já existe!', ' Atenção!', mb_IconInformation);
         Abort;
@@ -238,29 +188,35 @@ begin
   end;  //--------
 
 
-  if IBTableAlunos.State = dsInsert then
+  if tbAlunos.State = dsInsert then
     semaforo := 1
   else semaforo := 0;
 end;
 
-procedure TfrmDataModule.IBTableTurmasAfterPost(DataSet: TDataSet);
-begin
-  if semaforo = 1 then
-  begin
-    IBTableTurmas.Refresh;
-    IBTableTurmas.Last;
-  end;
-end;
-
-procedure TfrmDataModule.IBTableTurmasBeforeDelete(DataSet: TDataSet);
+procedure TfrmDataModule.tbEmpresasBeforeDelete(DataSet: TDataSet);
 begin
   If ( mensagem('Deseja mesmo excluir o Registro?') <> Idyes ) then
     Abort;
 end;
 
-procedure TfrmDataModule.IBTableTurmasBeforePost(DataSet: TDataSet);
+procedure TfrmDataModule.tbTurmasAfterPost(DataSet: TDataSet);
 begin
-  if IBTableTurmas.State = dsInsert then
+  if semaforo = 1 then
+  begin
+    tbTurmas.Refresh;
+    tbTurmas.Last;
+  end;
+end;
+
+procedure TfrmDataModule.tbTurmasBeforeDelete(DataSet: TDataSet);
+begin
+  If ( mensagem('Deseja mesmo excluir o Registro?') <> Idyes ) then
+    Abort;
+end;
+
+procedure TfrmDataModule.tbTurmasBeforePost(DataSet: TDataSet);
+begin
+  if tbTurmas.State = dsInsert then
     semaforo := 1
   else semaforo := 0;
 end;
@@ -272,6 +228,12 @@ begin
     tbUsuarios.Refresh;
     tbUsuarios.Last;
   end;
+end;
+
+procedure TfrmDataModule.tbUsuariosBeforeDelete(DataSet: TDataSet);
+begin
+  If ( mensagem('Deseja mesmo excluir o Registro?') <> Idyes ) then
+    Abort;
 end;
 
 procedure TfrmDataModule.tbUsuariosBeforePost(DataSet: TDataSet);

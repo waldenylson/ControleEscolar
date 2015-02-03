@@ -39,9 +39,9 @@ begin
     Abort;
   end;
 
-  frmDataModule.IBTableAlunos.Locate('matricula', StrToInt(txtMatricula.Text), []);
+  frmDataModule.tbAlunos.Locate('matricula', StrToInt(txtMatricula.Text), []);
 
-  if frmDataModule.IBTableAlunosmatricula.Value <> StrToInt(txtMatricula.Text) then
+  if frmDataModule.tbAlunosmatricula.Value <> StrToInt(txtMatricula.Text) then
   begin
     Application.MessageBox('Aluno não encontrado c/ matrícula informada!', ' Atenção!', mb_IconInformation);
     Abort;
@@ -65,7 +65,10 @@ procedure TfrmVaParaAluno.txtMatriculaKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if key = VK_ESCAPE then
-    self.Close;
+  begin
+    vl_fecha_form:= true;
+    Close;
+  end;
 end;
 
 end.

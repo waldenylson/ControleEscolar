@@ -34,7 +34,7 @@ uses FormDataModule;
 
 procedure TfrmAutoCompleteNomeAluno.DBGrid1DblClick(Sender: TObject);
 begin
-  frmDataModule.IBTableAlunos.Locate('id', frmDataModule.IBQueryAutoCompleteid.Value, []);
+  frmDataModule.tbAlunos.Locate('id', frmDataModule.QueryAutoCompleteid.Value, []);
   self.Close;
 end;
 
@@ -43,7 +43,7 @@ procedure TfrmAutoCompleteNomeAluno.DBGrid1KeyPress(Sender: TObject;
 begin
   if (key = #13) then
     begin
-      frmDataModule.IBTableAlunos.Locate('id', frmDataModule.IBQueryAutoCompleteid.Value, []);
+      frmDataModule.tbAlunos.Locate('id', frmDataModule.QueryAutoCompleteid.Value, []);
       self.Close;
     end;
     if key = #27  then
@@ -52,7 +52,7 @@ end;
 
 procedure TfrmAutoCompleteNomeAluno.Edit1Change(Sender: TObject);
 begin
-  with frmDataModule.IBQueryAutoComplete do
+  with frmDataModule.QueryAutoComplete do
     begin
       Active := false;
       SQL.Clear;
@@ -79,7 +79,7 @@ begin
   begin
     if (key = #13) then
     begin
-      frmDataModule.IBTableAlunos.Locate('id', frmDataModule.IBQueryAutoCompleteid.Value, []);
+      frmDataModule.tbAlunos.Locate('id', frmDataModule.QueryAutoCompleteid.Value, []);
       self.Close;
     end;
     if key = #27  then

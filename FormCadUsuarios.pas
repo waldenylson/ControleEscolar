@@ -10,7 +10,7 @@ uses
   Buttons, System.Actions;
 
 type
-  TfrmCadUsusarios = class(TForm)
+  TfrmCadUsuarios = class(TForm)
     DBNavigator1: TDBNavigator;
     ActionManager1: TActionManager;
     fist: TAction;
@@ -58,14 +58,14 @@ type
   end;
 
 var
-  frmCadUsusarios: TfrmCadUsusarios;
+  frmCadUsuarios: TfrmCadUsuarios;
 
 implementation
 uses FormSobre, FormDataModule;
 
 {$R *.dfm}
 
-procedure TfrmCadUsusarios.aboutExecute(Sender: TObject);
+procedure TfrmCadUsuarios.aboutExecute(Sender: TObject);
 begin
   frmSobre := TfrmSobre.Create(self);
   try
@@ -76,64 +76,64 @@ begin
   end;
 end;
 
-procedure TfrmCadUsusarios.addExecute(Sender: TObject);
+procedure TfrmCadUsuarios.addExecute(Sender: TObject);
 begin
   frmDataModule.tbUsuarios.Insert;
 end;
 
-procedure TfrmCadUsusarios.cancelExecute(Sender: TObject);
+procedure TfrmCadUsuarios.cancelExecute(Sender: TObject);
 begin
   frmDataModule.tbUsuarios.Cancel;
 end;
 
-procedure TfrmCadUsusarios.delExecute(Sender: TObject);
+procedure TfrmCadUsuarios.delExecute(Sender: TObject);
 begin
   frmDataModule.tbUsuarios.Delete;
 end;
 
-procedure TfrmCadUsusarios.editExecute(Sender: TObject);
+procedure TfrmCadUsuarios.editExecute(Sender: TObject);
 begin
   frmDataModule.tbUsuarios.Edit;
 end;
 
-procedure TfrmCadUsusarios.fistExecute(Sender: TObject);
+procedure TfrmCadUsuarios.fistExecute(Sender: TObject);
 begin
   frmDataModule.tbUsuarios.First;
 end;
 
-procedure TfrmCadUsusarios.FormKeyDown(Sender: TObject; var Key: Word;
+procedure TfrmCadUsuarios.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if key = VK_ESCAPE then
     self.Close;
 end;
 
-procedure TfrmCadUsusarios.lastExecute(Sender: TObject);
+procedure TfrmCadUsuarios.lastExecute(Sender: TObject);
 begin
   frmDataModule.tbUsuarios.Last;
 end;
 
-procedure TfrmCadUsusarios.nextExecute(Sender: TObject);
+procedure TfrmCadUsuarios.nextExecute(Sender: TObject);
 begin
   frmDataModule.tbUsuarios.Next;
 end;
 
-procedure TfrmCadUsusarios.postExecute(Sender: TObject);
+procedure TfrmCadUsuarios.postExecute(Sender: TObject);
 begin
   frmDataModule.tbUsuarios.Post;
 end;
 
-procedure TfrmCadUsusarios.prevExecute(Sender: TObject);
+procedure TfrmCadUsuarios.prevExecute(Sender: TObject);
 begin
   frmDataModule.tbUsuarios.Prior;
 end;
 
-procedure TfrmCadUsusarios.refreshExecute(Sender: TObject);
+procedure TfrmCadUsuarios.refreshExecute(Sender: TObject);
 begin
   frmDataModule.tbUsuarios.Refresh;
 end;
 
-procedure TfrmCadUsusarios.sairExecute(Sender: TObject);
+procedure TfrmCadUsuarios.sairExecute(Sender: TObject);
 begin
   Close;
 end;

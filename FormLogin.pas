@@ -15,8 +15,8 @@ type
     Label2: TLabel;
     BitBtn1: TBitBtn;
     Label3: TLabel;
-    Label4: TLabel;
     Label5: TLabel;
+    Label4: TLabel;
     procedure txtUserEnter(Sender: TObject);
     procedure txtUserExit(Sender: TObject);
     procedure txtPassEnter(Sender: TObject);

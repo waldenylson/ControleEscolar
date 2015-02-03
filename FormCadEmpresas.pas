@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ImgList, ActnList, XPStyleActnCtrls, ActnMan, ComCtrls, StdCtrls,
-  Mask, DBCtrls, ToolWin, ActnCtrls, ActnMenus, ExtCtrls;
+  Mask, DBCtrls, ToolWin, ActnCtrls, ActnMenus, ExtCtrls, System.Actions;
 
 type
   TfrmCadEmpresas = class(TForm)
@@ -102,27 +102,27 @@ end;
 
 procedure TfrmCadEmpresas.addExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableEmpresas.Insert;
+  frmDataModule.tbEmpresas.Insert;
 end;
 
 procedure TfrmCadEmpresas.cancelExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableEmpresas.Cancel;
+  frmDataModule.tbEmpresas.Cancel;
 end;
 
 procedure TfrmCadEmpresas.delExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableEmpresas.Delete;
+  frmDataModule.tbEmpresas.Delete;
 end;
 
 procedure TfrmCadEmpresas.editExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableEmpresas.Edit;
+  frmDataModule.tbEmpresas.Edit;
 end;
 
 procedure TfrmCadEmpresas.fistExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableEmpresas.First;
+  frmDataModule.tbEmpresas.First;
 end;
 
 procedure TfrmCadEmpresas.FormKeyDown(Sender: TObject; var Key: Word;
@@ -134,27 +134,27 @@ end;
 
 procedure TfrmCadEmpresas.lastExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableEmpresas.Last;
+  frmDataModule.tbEmpresas.Last;
 end;
 
 procedure TfrmCadEmpresas.nextExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableEmpresas.Next;
+  frmDataModule.tbEmpresas.Next;
 end;
 
 procedure TfrmCadEmpresas.postExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableEmpresas.Post;
+  frmDataModule.tbEmpresas.Post;
 end;
 
 procedure TfrmCadEmpresas.prevExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableEmpresas.Prior;
+  frmDataModule.tbEmpresas.Prior;
 end;
 
 procedure TfrmCadEmpresas.refreshExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableEmpresas.Refresh;
+  frmDataModule.tbEmpresas.Refresh;
 end;
 
 procedure TfrmCadEmpresas.sairExecute(Sender: TObject);

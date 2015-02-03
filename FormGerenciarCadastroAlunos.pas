@@ -102,7 +102,7 @@ end;
 
 procedure TfrmGerenciarCadastroAlunos.addExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableAlunos.Insert;
+  frmDataModule.tbAlunos.Insert;
 end;
 
 procedure TfrmGerenciarCadastroAlunos.BitBtn1Click(Sender: TObject);
@@ -129,15 +129,15 @@ end;
 
 procedure TfrmGerenciarCadastroAlunos.cancelExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableAlunos.Cancel;
+  frmDataModule.tbAlunos.Cancel;
 end;
 
 procedure TfrmGerenciarCadastroAlunos.DBEdit1Change(Sender: TObject);
 begin
-  if (frmDataModule.IBTableAlunos.State <> dsInsert) and (frmDataModule.IBTableAlunos.State <> dsEdit) and (frmDataModule.IBTableAlunosfoto.Value <> '') then
+  if (frmDataModule.tbAlunos.State <> dsInsert) and (frmDataModule.tbAlunos.State <> dsEdit) and (frmDataModule.tbAlunosfoto.Value <> '') then
   begin
     try
-      self.foto.Picture.LoadFromFile(frmDataModule.IBTableAlunosFOTO.Value);
+      self.foto.Picture.LoadFromFile(frmDataModule.tbAlunosfoto.Value);
     except
       Application.MessageBox('Não foi possível encontrar a imagem cadastrada!' + #13+
       'Altere a imagem p/ corrigir o problema.', 'Atenção!');
@@ -145,60 +145,60 @@ begin
     end;
   end;
 
-  if frmDataModule.IBTableAlunosfoto.Value = '' then
+  if frmDataModule.tbAlunosfoto.Value = '' then
     self.foto.Picture := nil;
 end;
 
 procedure TfrmGerenciarCadastroAlunos.delExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableAlunos.Delete;
+  frmDataModule.tbAlunos.Delete;
 end;
 
 procedure TfrmGerenciarCadastroAlunos.editExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableAlunos.Edit;
+  frmDataModule.tbAlunos.Edit;
 end;
 
 procedure TfrmGerenciarCadastroAlunos.fistExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableAlunos.First;
+  frmDataModule.tbAlunos.First;
 end;
 
 procedure TfrmGerenciarCadastroAlunos.fotoDblClick(Sender: TObject);
 begin
-  if ( (frmDataModule.IBTableAlunos.State = dsInsert) OR (frmDataModule.IBTableAlunos.State = dsEdit) )  then
+  if ( (frmDataModule.tbAlunos.State = dsInsert) OR (frmDataModule.tbAlunos.State = dsEdit) )  then
   begin
     if abreFoto.Execute then
     begin
       foto.Picture.LoadFromFile(abreFoto.FileName);
-      frmDataModule.IBTableAlunosFOTO.asString := abreFoto.FileName;
+      frmDataModule.tbAlunosfoto.asString := abreFoto.FileName;
     end;
   end;
 end;
 
 procedure TfrmGerenciarCadastroAlunos.lastExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableAlunos.Last;
+  frmDataModule.tbAlunos.Last;
 end;
 
 procedure TfrmGerenciarCadastroAlunos.nextExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableAlunos.Next;
+  frmDataModule.tbAlunos.Next;
 end;
 
 procedure TfrmGerenciarCadastroAlunos.postExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableAlunos.Post;
+  frmDataModule.tbAlunos.Post;
 end;
 
 procedure TfrmGerenciarCadastroAlunos.prevExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableAlunos.Prior;
+  frmDataModule.tbAlunos.Prior;
 end;
 
 procedure TfrmGerenciarCadastroAlunos.refreshExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableAlunos.Refresh;
+  frmDataModule.tbAlunos.Refresh;
 end;
 
 procedure TfrmGerenciarCadastroAlunos.sairExecute(Sender: TObject);

@@ -74,52 +74,52 @@ end;
 
 procedure TfrmGerenciarCadastroTurmas.addExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableTurmas.Insert;
+  frmDataModule.tbTurmas.Insert;
 end;
 
 procedure TfrmGerenciarCadastroTurmas.cancelExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableTurmas.Cancel;
+  frmDataModule.tbTurmas.Cancel;
 end;
 
 procedure TfrmGerenciarCadastroTurmas.delExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableTurmas.Delete;
+  frmDataModule.tbTurmas.Delete;
 end;
 
 procedure TfrmGerenciarCadastroTurmas.editExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableTurmas.Edit;
+  frmDataModule.tbTurmas.Edit;
 end;
 
 procedure TfrmGerenciarCadastroTurmas.fistExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableTurmas.First;
+  frmDataModule.tbTurmas.First;
 end;
 
 procedure TfrmGerenciarCadastroTurmas.lastExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableTurmas.Last;
+  frmDataModule.tbTurmas.Last;
 end;
 
 procedure TfrmGerenciarCadastroTurmas.nextExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableTurmas.Next;
+  frmDataModule.tbTurmas.Next;
 end;
 
 procedure TfrmGerenciarCadastroTurmas.postExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableTurmas.Post;
+  frmDataModule.tbTurmas.Post;
 end;
 
 procedure TfrmGerenciarCadastroTurmas.prevExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableTurmas.Prior;
+  frmDataModule.tbTurmas.Prior;
 end;
 
 procedure TfrmGerenciarCadastroTurmas.refreshExecute(Sender: TObject);
 begin
-  frmDataModule.IBTableTurmas.Refresh;
+  frmDataModule.tbTurmas.Refresh;
 end;
 
 procedure TfrmGerenciarCadastroTurmas.sairExecute(Sender: TObject);

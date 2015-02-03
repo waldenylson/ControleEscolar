@@ -36,13 +36,12 @@ object frmVaParaAluno: TfrmVaParaAluno
   end
   object BitBtn1: TBitBtn
     Left = 250
-    Top = 33
+    Top = 30
     Width = 75
     Height = 25
     Caption = '&GO'
-    DoubleBuffered = True
     Kind = bkYes
-    ParentDoubleBuffered = False
+    NumGlyphs = 2
     TabOrder = 1
     OnClick = BitBtn1Click
   end

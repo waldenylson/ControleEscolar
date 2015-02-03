@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls;
+  Dialogs, StdCtrls, ExtCtrls, Vcl.Imaging.pngimage;
 
 type
   TfrmSelecionaTela2 = class(TForm)
@@ -14,6 +14,7 @@ type
     Label1: TLabel;
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Image1Click(Sender: TObject);
+    procedure Image3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,6 +45,17 @@ begin
   finally
     frmCadEmpresas.Release;
     frmCadEmpresas.Free;
+  end;
+end;
+
+procedure TfrmSelecionaTela2.Image3Click(Sender: TObject);
+begin
+  frmCadUsuarios := TfrmCadUsuarios.Create(Self);
+  try
+    frmCadUsuarios.ShowModal;
+  finally
+    frmCadUsuarios.Release;
+    frmCadUsuarios.Free;
   end;
 end;
 
