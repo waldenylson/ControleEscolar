@@ -15,6 +15,7 @@ object frmSobre: TfrmSobre
   OldCreateOrder = False
   Position = poOwnerFormCenter
   OnClose = FormClose
+  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel

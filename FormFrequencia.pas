@@ -10,27 +10,9 @@ uses
 
 type
   TfrmFrequencia = class(TForm)
-    Image1: TImage;
-    GroupBox1: TGroupBox;
-    Panel1: TPanel;
-    foto: TImage;
-    Label1: TLabel;
-    txtMatricula: TEdit;
-    Label4: TLabel;
-    DBText1: TDBText;
     DataSource: TDataSource;
-    Label5: TLabel;
-    Label7: TLabel;
-    DBText3: TDBText;
-    Label8: TLabel;
-    DBText4: TDBText;
     StatusBar1: TStatusBar;
     Timer1: TTimer;
-    lblAviso: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Image2: TImage;
-    lblAviso2: TLabel;
     Connection: TUniConnection;
     QueryEntrada: TUniQuery;
     MySQLProvider: TMySQLUniProvider;
@@ -49,6 +31,26 @@ type
     Querydata_nasc: TStringField;
     Queryturma: TStringField;
     Queryturno: TStringField;
+    Panel2: TPanel;
+    Image1: TImage;
+    Label3: TLabel;
+    Label2: TLabel;
+    Panel3: TPanel;
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    lblAviso: TLabel;
+    lblAviso2: TLabel;
+    Panel1: TPanel;
+    foto: TImage;
+    Label1: TLabel;
+    Label4: TLabel;
+    txtMatricula: TEdit;
+    DBText1: TDBText;
+    Label5: TLabel;
+    Label7: TLabel;
+    DBText3: TDBText;
+    DBText4: TDBText;
+    Label8: TLabel;
     procedure txtMatriculaEnter(Sender: TObject);
     procedure txtMatriculaExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);

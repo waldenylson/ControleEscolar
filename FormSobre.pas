@@ -17,6 +17,7 @@ type
     Label6: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Label3Click(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -35,6 +36,15 @@ begin
   {frmSobre.Release;
   frmSobre := nil;
   frmSobre.Free;}
+end;
+
+procedure TfrmSobre.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  case key of
+    //VK_F2     : self.Close;
+    VK_ESCAPE : self.Close;
+  end;
 end;
 
 procedure TfrmSobre.Label3Click(Sender: TObject);
