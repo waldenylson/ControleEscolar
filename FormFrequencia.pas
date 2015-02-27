@@ -4,13 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, dxGDIPlusClasses, ExtCtrls, IBDatabase, DB, ExtDlgs, StdCtrls, INIFiles, UmensagemConfirm,
-  IBCustomDataSet, IBQuery, DBCtrls, ComCtrls, DateUtils, Jpeg, PNGImage;
+  Dialogs, ExtCtrls, IBDatabase, DB, ExtDlgs, StdCtrls, INIFiles, UmensagemConfirm,
+  IBCustomDataSet, IBQuery, DBCtrls, ComCtrls, DateUtils, Jpeg, PNGImage,
+  UniProvider, MySQLUniProvider, MemDS, DBAccess, Uni;
 
 type
   TfrmFrequencia = class(TForm)
-    IBDatabase: TIBDatabase;
-    IBTransaction: TIBTransaction;
     Image1: TImage;
     GroupBox1: TGroupBox;
     Panel1: TPanel;
@@ -18,7 +17,6 @@ type
     Label1: TLabel;
     txtMatricula: TEdit;
     Label4: TLabel;
-    IBQuery: TIBQuery;
     DBText1: TDBText;
     DataSource: TDataSource;
     Label5: TLabel;
@@ -28,26 +26,29 @@ type
     DBText4: TDBText;
     StatusBar1: TStatusBar;
     Timer1: TTimer;
-    IBQueryEntrada: TIBQuery;
-    IBQuerySaida: TIBQuery;
     lblAviso: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Image2: TImage;
     lblAviso2: TLabel;
-    IBQueryEntradaid: TIntegerField;
-    IBQueryEntradaaluno_id: TIntegerField;
-    IBQuerySaidaid: TIntegerField;
-    IBQuerySaidaaluno_id: TIntegerField;
-    IBQuerynome: TIBStringField;
-    IBQueryfoto: TIBStringField;
-    IBQueryturma: TIBStringField;
-    IBQueryturno: TIBStringField;
-    IBQueryEntradadata: TDateField;
-    IBQueryEntradahora: TTimeField;
-    IBQuerySaidadata: TDateField;
-    IBQuerySaidahora: TTimeField;
-    IBQuerydata_nasc: TDateField;
+    Connection: TUniConnection;
+    QueryEntrada: TUniQuery;
+    MySQLProvider: TMySQLUniProvider;
+    QuerySaida: TUniQuery;
+    QueryEntradaid: TIntegerField;
+    QueryEntradaaluno_id: TIntegerField;
+    QueryEntradadata: TDateField;
+    QueryEntradahora: TTimeField;
+    QuerySaidaid: TIntegerField;
+    QuerySaidaaluno_id: TIntegerField;
+    QuerySaidadata: TDateField;
+    QuerySaidahora: TTimeField;
+    Query: TUniQuery;
+    Querynome: TStringField;
+    Queryfoto: TStringField;
+    Querydata_nasc: TStringField;
+    Queryturma: TStringField;
+    Queryturno: TStringField;
     procedure txtMatriculaEnter(Sender: TObject);
     procedure txtMatriculaExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -96,7 +97,7 @@ begin
       end
       else
       begin // verifica tempo de entrada
-        if MinutesBetween(IBQueryEntradahora.AsDateTime, TimeOf(now)) < 30  then
+        if MinutesBetween(QueryEntradahora.AsDateTime, TimeOf(now)) < 30  then
         begin
           self.lblAviso.Caption  := 'SAÍDA NÃO LIBERADA!';
           self.lblAviso2.Caption := '         ENTRADA REGISTRADA A MENOS DE 30 MINUTOS!';
@@ -107,7 +108,7 @@ begin
         begin
           self.lblAviso.Caption := 'SAÍDA LIBERADA!';
           self.lblAviso.Visible := true;
-          with IBQuerySaida do
+          with QuerySaida do
           begin
             SQL.Clear;
             SQL.Add('INSERT INTO "saida" VALUES(null, (SELECT "id" FROM "alunos" "a" WHERE("a"."matricula" = :matricula)), CURRENT_DATE, CURRENT_TIME)');
@@ -121,7 +122,7 @@ begin
     begin
       self.lblAviso.Caption := 'ENTRADA LIBERADA!';
       self.lblAviso.Visible := true;
-      with IBQuerySaida do
+      with QuerySaida do
       begin
         SQL.Clear;
         SQL.Add('INSERT INTO "entrada" VALUES(null, (SELECT "id" FROM "alunos" "a" WHERE("a"."matricula" = :matricula)), CURRENT_DATE, CURRENT_TIME)');
@@ -135,12 +136,12 @@ end;
 
 function TfrmFrequencia.findAluno(matricula: Integer): bool;
 begin
-  with IBQuery do
+  with Query do
   begin
     Active := false;
     SQL.Clear;
     SQL.Add('SELECT "a"."nome", "a"."foto", "a"."data_nasc", "t"."turma", "t"."turno" FROM "alunos" "a", "turmas" "t" WHERE("a"."turma_id" = "t"."id" AND "a"."matricula" = :matricula)');
-    ParamByName('matricula').AsString := matricula;
+    ParamByName('matricula').AsInteger := matricula;
     Active := true;
 
     if RecordCount = 0 then
@@ -154,7 +155,7 @@ end;
 function TfrmFrequencia.findAlunoEntrada(matricula: Integer): bool;
 begin
   self.lblAviso.Visible := false;
-  with IBQueryEntrada do
+  with QueryEntrada do
   begin
     Active := false;
     SQL.Clear;
@@ -172,7 +173,7 @@ end;
 function TfrmFrequencia.findAlunoSaida(matricula: Integer): bool;
 begin
   self.lblAviso.Visible := false;
-  with IBQuerySaida do
+  with QuerySaida do
   begin
     Active := false;
     SQL.Clear;
@@ -198,7 +199,7 @@ end;
 procedure TfrmFrequencia.FormCreate(Sender: TObject);
 var iniFile: TIniFile;
 begin
-  try
+  {try
     iniFile := TIniFile.Create(ExtractFileDir(Application.exeName) + '\Setings.ini');
 
     with self.IBDatabase do
@@ -214,14 +215,14 @@ begin
   except
     ShowMessage('Ocorreu um Erro ao Tentar Conectar com o' + #13 + 'Servidor de Banco de Dados!' + #13 + 'Entre em contato com o suporte técnico!');
     Application.Terminate;
-  end;
+  end;    }
   frmFrequencia.Color := RGB(230, 231, 232);
 end;
 
 procedure TfrmFrequencia.loadFotoAluno;
 begin
   try
-    self.foto.Picture.LoadFromFile(IBQueryfoto.AsString);
+    self.foto.Picture.LoadFromFile(Queryfoto.AsString);
   except
     Application.MessageBox('Não foi possível encontrar a imagem cadastrada!', 'Atenção!', mb_IconInformation);
     self.foto.Picture := nil;
