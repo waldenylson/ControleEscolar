@@ -81,6 +81,7 @@ uses FormSobre;
 {$R *.dfm}
 
 procedure TfrmFrequencia.buscarAluno;
+var horaConsulta: TDateTime;
 begin
   self.lblAviso2.Visible := false;
 
@@ -226,8 +227,9 @@ begin
   try
     self.foto.Picture.LoadFromFile(Queryfoto.AsString);
   except
-    Application.MessageBox('Não foi possível encontrar a imagem cadastrada!', 'Atenção!', mb_IconInformation);
-    self.foto.Picture := nil;
+    //Application.MessageBox('Não foi possível encontrar a imagem cadastrada!', 'Atenção!', mb_IconInformation);
+    //self.foto.Picture := nil;
+    self.foto.Picture.LoadFromFile(ExtractFilePath(Application.ExeName)+ 'Imagens/avatar.png');
   end;
 end;
 
@@ -263,7 +265,6 @@ procedure TfrmFrequencia.txtMatriculaKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   case key of
-    //VK_F2     : self.Close;
     VK_F1     : self.showFormSobre;
     VK_RETURN : self.buscarAluno;
     VK_ESCAPE : self.Close;

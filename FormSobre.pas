@@ -42,7 +42,7 @@ procedure TfrmSobre.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   case key of
-    //VK_F2     : self.Close;
+
     VK_ESCAPE : self.Close;
   end;
 end;
