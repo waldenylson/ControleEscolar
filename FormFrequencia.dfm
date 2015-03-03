@@ -45,6 +45,20 @@ object frmFrequencia: TfrmFrequencia
     ParentFont = False
     Visible = False
   end
+  object lblAviso3: TLabel
+    Left = 121
+    Top = 489
+    Width = 184
+    Height = 57
+    Caption = 'lblAviso'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -47
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Visible = False
+  end
   object StatusBar1: TStatusBar
     Left = 0
     Top = 746
@@ -1497,13 +1511,13 @@ object frmFrequencia: TfrmFrequencia
     end
     object Bevel1: TBevel
       Left = 7
-      Top = 267
+      Top = 264
       Width = 257
       Height = 2
     end
     object Bevel2: TBevel
       Left = 8
-      Top = 292
+      Top = 296
       Width = 257
       Height = 2
     end
@@ -1836,5 +1850,12 @@ object frmFrequencia: TfrmFrequencia
       Required = True
       Size = 50
     end
+  end
+  object TimerLimpaTela: TTimer
+    Enabled = False
+    Interval = 3000
+    OnTimer = TimerLimpaTelaTimer
+    Left = 912
+    Top = 680
   end
 end

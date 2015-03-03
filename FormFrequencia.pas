@@ -51,6 +51,8 @@ type
     DBText3: TDBText;
     DBText4: TDBText;
     Label8: TLabel;
+    TimerLimpaTela: TTimer;
+    lblAviso3: TLabel;
     procedure txtMatriculaEnter(Sender: TObject);
     procedure txtMatriculaExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -58,6 +60,7 @@ type
     procedure txtMatriculaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure Timer1Timer(Sender: TObject);
+    procedure TimerLimpaTelaTimer(Sender: TObject);
   private
     { Private declarations }
     procedure showFormSobre;
@@ -81,60 +84,67 @@ uses FormSobre;
 {$R *.dfm}
 
 procedure TfrmFrequencia.buscarAluno;
-var horaConsulta: TDateTime;
 begin
   self.lblAviso2.Visible := false;
+  self.lblAviso3.Visible := false;
 
-  if not self.findAluno(StrToInt(self.txtMatricula.Text)) then
-    Application.MessageBox('Não foi possível encontrar o aluno!', ' Atenção!', mb_IconInformation)
-  else
-  begin
-    if findAlunoEntrada(StrToInt(self.txtMatricula.Text)) then //aluno já entrou
+  try
+    if not self.findAluno(StrToInt(self.txtMatricula.Text)) then
     begin
-      if findAlunoSaida(StrToInt(self.txtMatricula.Text)) then  //aluno já saiu
+      //Application.MessageBox('Não foi possível encontrar o aluno!', ' Atenção!', mb_IconInformation)
+      lblAviso3.Caption := 'Não foi possível encontrar o aluno!';
+      lblAviso3.Visible := true;
+    end
+    else
+    begin
+      if findAlunoEntrada(StrToInt(self.txtMatricula.Text)) then //aluno já entrou
       begin
-        self.lblAviso.Caption  := 'SAÍDA JÁ EFETUADA!';
-        self.lblAviso2.Caption := 'REGISTRO DE ENTRADA JÁ EFETUADO PARA ESTA DATA!';
-        self.lblAviso.Visible  := true;
-        self.lblAviso2.Visible := true;
-      end
-      else
-      begin // verifica tempo de entrada
-        if MinutesBetween(QueryEntradahora.AsDateTime, TimeOf(now)) < 30  then
+        if findAlunoSaida(StrToInt(self.txtMatricula.Text)) then  //aluno já saiu
         begin
-          self.lblAviso.Caption  := 'SAÍDA NÃO LIBERADA!';
-          self.lblAviso2.Caption := '         ENTRADA REGISTRADA A MENOS DE 30 MINUTOS!';
+          self.lblAviso.Caption  := 'SAÍDA JÁ EFETUADA!';
+          self.lblAviso2.Caption := 'REGISTRO DE ENTRADA JÁ EFETUADO PARA ESTA DATA!';
           self.lblAviso.Visible  := true;
           self.lblAviso2.Visible := true;
         end
         else
-        begin
-          self.lblAviso.Caption := 'SAÍDA LIBERADA!';
-          self.lblAviso.Visible := true;
-          with QuerySaida do
+        begin // verifica tempo de entrada
+          if MinutesBetween(QueryEntradahora.AsDateTime, TimeOf(now)) < 30  then
           begin
-            SQL.Clear;
-            SQL.Add('INSERT INTO "saida" VALUES(null, (SELECT "id" FROM "alunos" "a" WHERE("a"."matricula" = :matricula)), CURRENT_DATE, CURRENT_TIME)');
-            ParamByName('matricula').AsInteger := StrToInt(self.txtMatricula.Text);
-            ExecSQL;
+            self.lblAviso.Caption  := 'SAÍDA NÃO LIBERADA!';
+            self.lblAviso2.Caption := '         ENTRADA REGISTRADA A MENOS DE 30 MINUTOS!';
+            self.lblAviso.Visible  := true;
+            self.lblAviso2.Visible := true;
+          end
+          else
+          begin
+            self.lblAviso.Caption := 'SAÍDA LIBERADA!';
+            self.lblAviso.Visible := true;
+            with QuerySaida do
+            begin
+              SQL.Clear;
+              SQL.Add('INSERT INTO "saida" VALUES(null, (SELECT "id" FROM "alunos" "a" WHERE("a"."matricula" = :matricula)), CURRENT_DATE, CURRENT_TIME)');
+              ParamByName('matricula').AsInteger := StrToInt(self.txtMatricula.Text);
+              ExecSQL;
+            end;
           end;
         end;
-      end;
-    end
-    else  //alunos ainda nao entrou
-    begin
-      self.lblAviso.Caption := 'ENTRADA LIBERADA!';
-      self.lblAviso.Visible := true;
-      with QuerySaida do
+      end
+      else  //alunos ainda nao entrou
       begin
-        SQL.Clear;
-        SQL.Add('INSERT INTO "entrada" VALUES(null, (SELECT "id" FROM "alunos" "a" WHERE("a"."matricula" = :matricula)), CURRENT_DATE, CURRENT_TIME)');
-        ParamByName('matricula').AsInteger := StrToInt(self.txtMatricula.Text);
-        ExecSQL;
+        self.lblAviso.Caption := 'ENTRADA LIBERADA!';
+        self.lblAviso.Visible := true;
+        with QuerySaida do
+        begin
+          SQL.Clear;
+          SQL.Add('INSERT INTO "entrada" VALUES(null, (SELECT "id" FROM "alunos" "a" WHERE("a"."matricula" = :matricula)), CURRENT_DATE, CURRENT_TIME)');
+          ParamByName('matricula').AsInteger := StrToInt(self.txtMatricula.Text);
+          ExecSQL;
+        end;
       end;
     end;
+  except
   end;
-  txtMatricula.Clear;
+  TimerLimpaTela.Enabled := true;
 end;
 
 function TfrmFrequencia.findAluno(matricula: Integer): bool;
@@ -249,6 +259,19 @@ begin
   StatusBar1.Panels[2].Text := FormatDateTime('dddd ", " dd " de " mmmm " de " yyyy',Now());
   StatusBar1.Panels[1].Text := TimeToStr(Time);
   StatusBar1.Panels[1].Text := FormatDateTime('hh":"nn":"ss"',Now());
+end;
+
+procedure TfrmFrequencia.TimerLimpaTelaTimer(Sender: TObject);
+begin
+  txtMatricula.Clear;
+  DBText1.Caption   := '';
+  DBText3.Caption   := '';
+  DBText4.Caption   := '';
+  lblAviso.Caption  := '';
+  lblAviso2.Caption := '';
+  lblAviso3.Caption := '';
+
+  TimerLimpaTela.Enabled := false;
 end;
 
 procedure TfrmFrequencia.txtMatriculaEnter(Sender: TObject);
