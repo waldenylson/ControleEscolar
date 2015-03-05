@@ -212,6 +212,8 @@ end;
 procedure TfrmFrequencia.FormCreate(Sender: TObject);
 var iniFile: TIniFile;
 begin
+     Self.Connection.Connected := true;
+
   {try
     iniFile := TIniFile.Create(ExtractFileDir(Application.exeName) + '\Setings.ini');
 

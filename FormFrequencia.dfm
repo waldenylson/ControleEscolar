@@ -1767,7 +1767,6 @@ object frmFrequencia: TfrmFrequencia
     Connection = Connection
     SQL.Strings = (
       'SELECT * FROM "entrada"')
-    Active = True
     Left = 912
     Top = 528
     object QueryEntradaid: TIntegerField
@@ -1795,7 +1794,6 @@ object frmFrequencia: TfrmFrequencia
     Connection = Connection
     SQL.Strings = (
       'SELECT * FROM "saida"')
-    Active = True
     Left = 912
     Top = 576
     object QuerySaidaid: TIntegerField
