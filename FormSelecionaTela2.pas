@@ -12,8 +12,6 @@ type
     Label3: TLabel;
     Image1: TImage;
     Label1: TLabel;
-    Image2: TImage;
-    Label2: TLabel;
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Image1Click(Sender: TObject);
     procedure Image3Click(Sender: TObject);

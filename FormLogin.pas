@@ -8,11 +8,11 @@ uses
 
 type
   TfrmLogin = class(TForm)
-    Image1: TImage;
-    txtUser: TEdit;
-    txtPass: TEdit;
+    GroupBox1: TGroupBox;
     Label1: TLabel;
+    txtUser: TEdit;
     Label2: TLabel;
+    txtPass: TEdit;
     BitBtn1: TBitBtn;
     Label3: TLabel;
     Label5: TLabel;

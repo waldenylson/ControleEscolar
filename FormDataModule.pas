@@ -8,7 +8,7 @@ uses
   FMTBcd, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error,
   FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef,
-  FireDAC.Comp.Client, UniProvider, MySQLUniProvider, MemDS, DBAccess, Uni;
+  FireDAC.Comp.Client, UniProvider, MySQLUniProvider, MemDS, DBAccess, Uni, Criptografia;
 
 type
   TfrmDataModule = class(TDataModule)
@@ -100,32 +100,39 @@ uses FormGerenciarCadastroAlunos;
 procedure TfrmDataModule.DataModuleCreate(Sender: TObject);
 var iniFile: TIniFile;
 begin
-  {try
+  try
     iniFile := TIniFile.Create(ExtractFileDir(Application.exeName) + '\Setings.ini');
 
-    with self.IBDatabase do
+    with self.UniConnection do
     begin
-      Connected    := false;
-      DatabaseName := iniFile.ReadString('database', 'serverIP', '') + ':' + ExtractFilePath(Application.ExeName) + '\DATABASE\Banco.fdb';
+      Connected := false;
+
+      Server    := iniFile.ReadString('database', 'serverIP', '');
+      Username  := decript(iniFile.ReadString('database', 'serverUserName', ''));
+      Port      := StrToInt(decript(iniFile.ReadString('database', 'serverPort', '')));
+      Password  := decript(iniFile.ReadString('database', 'serverPassword', ''));
+
       Connected    := true;
     end;
 
     with frmDataModule do
     begin
-      IBTransaction.Active   := true;
-      IBTableAlunos.Active   := true;
-      IBTableTurmas.Active   := true;
-      IBQueryLogin.Active    := true;
-      IBTableUsuarios.Active := true;
-      IBTableEmpresas.Active := true;
-      IBTableFeriados.Active := true;
+      tbAlunos.Active   := true;
+      tbTurmas.Active   := true;
+      tbUsuarios.Active := true;
+      tbEmpresas.Active := true;
+      tbFeriados.Active := true;
+
+      QueryLogin.Active        := true;
+      QueryMatricula.Active    := true;
+      QueryAutoComplete.Active := true;
     end;
 
     iniFile.Free;
   except
     ShowMessage('Ocorreu um Erro ao Tentar Conectar com o' + #13 + 'Servidor de Banco de Dados!' + #13 + 'Entre em contato com o suporte técnico!');
     Application.Terminate;
-  end;  }
+  end;
 end;
 
 procedure TfrmDataModule.tbAlunosAfterCancel(DataSet: TDataSet);

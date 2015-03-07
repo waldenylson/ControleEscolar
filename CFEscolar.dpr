@@ -15,7 +15,10 @@ uses
   FormExtrairRelatorios in 'FormExtrairRelatorios.pas' {frmExtrairRelatorios},
   FormCadFeriados in 'FormCadFeriados.pas' {frmCadFeriados},
   FormAutoCompleteNomeAluno in 'FormAutoCompleteNomeAluno.pas' {frmAutoCompleteNomeAluno},
-  FormVaParaAluno in 'FormVaParaAluno.pas' {frmVaParaAluno};
+  FormVaParaAluno in 'FormVaParaAluno.pas' {frmVaParaAluno},
+  Vcl.Themes,
+  Vcl.Styles,
+  Criptografia in 'Criptografia.pas';
 
 {$R *.res}
 
@@ -25,6 +28,7 @@ begin
 
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Turquoise Gray');
   Application.Title := '  CFEscolar ';
   Application.CreateForm(TfrmDataModule, frmDataModule);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);

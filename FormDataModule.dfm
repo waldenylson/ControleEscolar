@@ -20,7 +20,7 @@ object frmDataModule: TfrmDataModule
   end
   object UniConnection: TUniConnection
     ProviderName = 'MySQL'
-    Port = 3308
+    Port = 3307
     Database = 'controle_escolar'
     Username = 'root'
     Server = 'localhost'
@@ -226,6 +226,7 @@ object frmDataModule: TfrmDataModule
   object tbFeriados: TUniTable
     TableName = 'turmas'
     Connection = UniConnection
+    Active = True
     Left = 40
     Top = 328
   end
