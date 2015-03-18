@@ -31,28 +31,22 @@ type
     Querydata_nasc: TStringField;
     Queryturma: TStringField;
     Queryturno: TStringField;
-    Panel2: TPanel;
-    Image1: TImage;
-    Label3: TLabel;
-    Label2: TLabel;
-    Panel3: TPanel;
-    Bevel1: TBevel;
-    Bevel2: TBevel;
     lblAviso: TLabel;
     lblAviso2: TLabel;
-    Panel1: TPanel;
-    foto: TImage;
-    Label1: TLabel;
-    Label4: TLabel;
-    txtMatricula: TEdit;
-    DBText1: TDBText;
-    Label5: TLabel;
-    Label7: TLabel;
-    DBText3: TDBText;
-    DBText4: TDBText;
-    Label8: TLabel;
     TimerLimpaTela: TTimer;
     lblAviso3: TLabel;
+    Image2: TImage;
+    txtMatricula: TEdit;
+    DBText1: TDBText;
+    DBText3: TDBText;
+    foto: TImage;
+    Label2: TLabel;
+    Label3: TLabel;
+    Bevel2: TBevel;
+    Bevel1: TBevel;
+    DBText4: TDBText;
+    lblData: TLabel;
+    lblHora: TLabel;
     procedure txtMatriculaEnter(Sender: TObject);
     procedure txtMatriculaExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -119,6 +113,8 @@ begin
           begin
             self.lblAviso.Caption := 'SAÍDA LIBERADA!';
             self.lblAviso.Visible := true;
+            self.lblData.Caption  := FormatDateTime('dd/mm/yyyy', Now());
+            self.lblHora.Caption  := FormatDateTime('hh:nn:ss',Now());
             with QuerySaida do
             begin
               SQL.Clear;
@@ -133,6 +129,8 @@ begin
       begin
         self.lblAviso.Caption := 'ENTRADA LIBERADA!';
         self.lblAviso.Visible := true;
+        self.lblData.Caption  := FormatDateTime('dd/mm/yyyy', Now());
+        self.lblHora.Caption  := FormatDateTime('hh:nn:ss',Now());
         with QuerySaida do
         begin
           SQL.Clear;
@@ -214,6 +212,9 @@ var iniFile: TIniFile;
 begin
      Self.Connection.Connected := true;
 
+     self.lblData.Caption  := '';
+     self.lblHora.Caption  := '';
+
   {try
     iniFile := TIniFile.Create(ExtractFileDir(Application.exeName) + '\Setings.ini');
 
@@ -272,6 +273,8 @@ begin
   lblAviso.Caption  := '';
   lblAviso2.Caption := '';
   lblAviso3.Caption := '';
+  lblData.Caption   := '';
+  lblHora.Caption   := '';
 
   TimerLimpaTela.Enabled := false;
 end;
