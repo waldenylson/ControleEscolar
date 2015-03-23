@@ -2783,6 +2783,7 @@ object frmFrequencia: TfrmFrequencia
     Width = 389
     Height = 33
     DataField = 'nome'
+    DataSource = DataSource
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -24
@@ -2796,6 +2797,7 @@ object frmFrequencia: TfrmFrequencia
     Width = 389
     Height = 27
     DataField = 'turma'
+    DataSource = DataSource
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -24
@@ -2914,12 +2916,6 @@ object frmFrequencia: TfrmFrequencia
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
-  end
-  object Bevel2: TBevel
-    Left = 9
-    Top = 578
-    Width = 195
-    Height = 2
   end
   object Bevel1: TBevel
     Left = 9

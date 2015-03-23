@@ -3,7 +3,8 @@ program PDV;
 uses
   Forms,
   FormFrequencia in 'FormFrequencia.pas' {frmFrequencia},
-  FormSobre in 'FormSobre.pas' {frmSobre};
+  FormSobre in 'FormSobre.pas' {frmSobre},
+  Criptografia in 'Criptografia.pas';
 
 {$R *.res}
 

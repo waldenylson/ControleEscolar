@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, IBDatabase, DB, ExtDlgs, StdCtrls, INIFiles, UmensagemConfirm,
   IBCustomDataSet, IBQuery, DBCtrls, ComCtrls, DateUtils, Jpeg, PNGImage,
-  UniProvider, MySQLUniProvider, MemDS, DBAccess, Uni;
+  UniProvider, MySQLUniProvider, MemDS, DBAccess, Uni, Criptografia;
 
 type
   TfrmFrequencia = class(TForm)
@@ -42,7 +42,6 @@ type
     foto: TImage;
     Label2: TLabel;
     Label3: TLabel;
-    Bevel2: TBevel;
     Bevel1: TBevel;
     DBText4: TDBText;
     lblData: TLabel;
@@ -210,28 +209,41 @@ end;
 procedure TfrmFrequencia.FormCreate(Sender: TObject);
 var iniFile: TIniFile;
 begin
-     Self.Connection.Connected := true;
+     //Self.Connection.Connected := true;
 
      self.lblData.Caption  := '';
      self.lblHora.Caption  := '';
 
-  {try
+     try
     iniFile := TIniFile.Create(ExtractFileDir(Application.exeName) + '\Setings.ini');
 
-    with self.IBDatabase do
+    with self.Connection do
     begin
-      Connected    := false;
-      DatabaseName := iniFile.ReadString('database', 'serverIP', '') + ':' + ExtractFilePath(Application.ExeName) + '\DATABASE\Banco.fdb';
+      Connected := false;
+
+      Server    := iniFile.ReadString('database', 'serverIP', '');
+      Username  := decript(iniFile.ReadString('database', 'serverUserName', ''));
+      Port      := StrToInt(decript(iniFile.ReadString('database', 'serverPort', '')));
+      Password  := decript(iniFile.ReadString('database', 'serverPassword', ''));
+
       Connected    := true;
     end;
 
-    IBTransaction.Active   := true;
+    Query.Active        := true;
+    QueryEntrada.Active := true;
+    QuerySaida.Active   := true;
+
+    DBText1.Caption   := '';
+    DBText3.Caption   := '';
+
 
     iniFile.Free;
   except
     ShowMessage('Ocorreu um Erro ao Tentar Conectar com o' + #13 + 'Servidor de Banco de Dados!' + #13 + 'Entre em contato com o suporte técnico!');
     Application.Terminate;
-  end;    }
+  end;
+
+
   frmFrequencia.Color := RGB(230, 231, 232);
 end;
 
