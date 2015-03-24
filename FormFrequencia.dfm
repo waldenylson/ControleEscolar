@@ -2991,6 +2991,9 @@ object frmFrequencia: TfrmFrequencia
     Top = 417
     Width = 237
     Height = 21
+    BevelKind = bkFlat
+    BevelOuter = bvRaised
+    Color = clMoneyGreen
     NumbersOnly = True
     TabOrder = 1
     OnEnter = txtMatriculaEnter
@@ -3014,7 +3017,6 @@ object frmFrequencia: TfrmFrequencia
     Database = 'controle_escolar'
     Username = 'root'
     Server = 'localhost'
-    Connected = True
     LoginPrompt = False
     Left = 912
     Top = 432

@@ -4,7 +4,9 @@ uses
   Forms,
   FormFrequencia in 'FormFrequencia.pas' {frmFrequencia},
   FormSobre in 'FormSobre.pas' {frmSobre},
-  Criptografia in 'Criptografia.pas';
+  Criptografia in 'Criptografia.pas',
+  Vcl.Themes,
+  Vcl.Styles;
 
 {$R *.res}
 

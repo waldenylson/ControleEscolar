@@ -215,33 +215,33 @@ begin
      self.lblHora.Caption  := '';
 
      try
-    iniFile := TIniFile.Create(ExtractFileDir(Application.exeName) + '\Setings.ini');
+      iniFile := TIniFile.Create(ExtractFileDir(Application.exeName) + '\Setings.ini');
 
-    with self.Connection do
-    begin
-      Connected := false;
+      with self.Connection do
+      begin
+        Connected := false;
 
-      Server    := iniFile.ReadString('database', 'serverIP', '');
-      Username  := decript(iniFile.ReadString('database', 'serverUserName', ''));
-      Port      := StrToInt(decript(iniFile.ReadString('database', 'serverPort', '')));
-      Password  := decript(iniFile.ReadString('database', 'serverPassword', ''));
+        Server    := iniFile.ReadString('database', 'serverIP', '');
+        Username  := decript(iniFile.ReadString('database', 'serverUserName', ''));
+        Port      := StrToInt(decript(iniFile.ReadString('database', 'serverPort', '')));
+        Password  := decript(iniFile.ReadString('database', 'serverPassword', ''));
 
-      Connected    := true;
+        Connected    := true;
+      end;
+
+      Query.Active        := true;
+      QueryEntrada.Active := true;
+      QuerySaida.Active   := true;
+
+      DBText1.Caption   := '';
+      DBText3.Caption   := '';
+
+
+      iniFile.Free;
+    except
+      ShowMessage('Ocorreu um Erro ao Tentar Conectar com o' + #13 + 'Servidor de Banco de Dados!' + #13 + 'Entre em contato com o suporte técnico!');
+      Application.Terminate;
     end;
-
-    Query.Active        := true;
-    QueryEntrada.Active := true;
-    QuerySaida.Active   := true;
-
-    DBText1.Caption   := '';
-    DBText3.Caption   := '';
-
-
-    iniFile.Free;
-  except
-    ShowMessage('Ocorreu um Erro ao Tentar Conectar com o' + #13 + 'Servidor de Banco de Dados!' + #13 + 'Entre em contato com o suporte técnico!');
-    Application.Terminate;
-  end;
 
 
   frmFrequencia.Color := RGB(230, 231, 232);

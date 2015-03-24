@@ -20,7 +20,7 @@ object Form1: TForm1
   object GroupBox1: TGroupBox
     Left = 5
     Top = 8
-    Width = 489
+    Width = 479
     Height = 137
     Caption = '   Servidor MariaDB  '
     TabOrder = 0

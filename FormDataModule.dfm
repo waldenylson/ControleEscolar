@@ -24,7 +24,6 @@ object frmDataModule: TfrmDataModule
     Database = 'controle_escolar'
     Username = 'root'
     Server = 'localhost'
-    Connected = True
     LoginPrompt = False
     Left = 40
     Top = 8
@@ -33,7 +32,6 @@ object frmDataModule: TfrmDataModule
   object tbAlunos: TUniTable
     TableName = 'alunos'
     Connection = UniConnection
-    Active = True
     BeforePost = tbAlunosBeforePost
     AfterPost = tbAlunosAfterPost
     AfterCancel = tbAlunosAfterCancel
@@ -101,7 +99,6 @@ object frmDataModule: TfrmDataModule
   object tbTurmas: TUniTable
     TableName = 'turmas'
     Connection = UniConnection
-    Active = True
     BeforePost = tbTurmasBeforePost
     AfterPost = tbTurmasAfterPost
     BeforeDelete = tbTurmasBeforeDelete
@@ -125,7 +122,6 @@ object frmDataModule: TfrmDataModule
   object tbUsuarios: TUniTable
     TableName = 'usuario'
     Connection = UniConnection
-    Active = True
     BeforePost = tbUsuariosBeforePost
     AfterPost = tbUsuariosAfterPost
     BeforeDelete = tbUsuariosBeforeDelete
@@ -154,7 +150,6 @@ object frmDataModule: TfrmDataModule
   object tbEmpresas: TUniTable
     TableName = 'empresas'
     Connection = UniConnection
-    Active = True
     BeforeDelete = tbEmpresasBeforeDelete
     Left = 40
     Top = 264
@@ -226,7 +221,6 @@ object frmDataModule: TfrmDataModule
   object tbFeriados: TUniTable
     TableName = 'turmas'
     Connection = UniConnection
-    Active = True
     Left = 40
     Top = 328
   end
@@ -238,7 +232,6 @@ object frmDataModule: TfrmDataModule
     Connection = UniConnection
     SQL.Strings = (
       'SELECT * FROM "usuario"')
-    Active = True
     Left = 40
     Top = 392
     object QueryLoginid_usuario: TIntegerField
@@ -265,7 +258,6 @@ object frmDataModule: TfrmDataModule
     Connection = UniConnection
     SQL.Strings = (
       'SELECT COUNT(*) as "qtd" FROM "alunos"')
-    Active = True
     Left = 40
     Top = 448
     object QueryMatriculaqtd: TLargeintField
@@ -278,7 +270,6 @@ object frmDataModule: TfrmDataModule
     Connection = UniConnection
     SQL.Strings = (
       'select "a"."id", "a"."nome", "a"."matricula" from "alunos" "a"')
-    Active = True
     Left = 640
     Top = 88
     object QueryAutoCompleteid: TIntegerField

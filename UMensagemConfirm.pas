@@ -15,6 +15,7 @@ begin
   (mensagem.FindComponent('YES') as TButton).Caption := 'Sim';
   (mensagem.FindComponent('NO') as TButton).Caption := 'Não';
   mensagem.Caption := 'Atenção!';
+  mensagem.Position := poMainFormCenter;
   result := mensagem.ShowModal;
 end;
 
