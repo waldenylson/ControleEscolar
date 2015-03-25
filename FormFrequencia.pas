@@ -105,13 +105,18 @@ begin
           begin
             self.lblAviso.Caption  := 'SAÍDA NÃO LIBERADA!';
             self.lblAviso2.Caption := '         ENTRADA REGISTRADA A MENOS DE 30 MINUTOS!';
+
             self.lblAviso.Visible  := true;
             self.lblAviso2.Visible := true;
+
+            self.lblData.Caption  := FormatDateTime('dd/mm/yyyy', Now());
+            self.lblHora.Caption  := FormatDateTime('hh:nn:ss',Now());
           end
           else
           begin
             self.lblAviso.Caption := 'SAÍDA LIBERADA!';
             self.lblAviso.Visible := true;
+
             self.lblData.Caption  := FormatDateTime('dd/mm/yyyy', Now());
             self.lblHora.Caption  := FormatDateTime('hh:nn:ss',Now());
             with QuerySaida do
@@ -128,6 +133,7 @@ begin
       begin
         self.lblAviso.Caption := 'ENTRADA LIBERADA!';
         self.lblAviso.Visible := true;
+
         self.lblData.Caption  := FormatDateTime('dd/mm/yyyy', Now());
         self.lblHora.Caption  := FormatDateTime('hh:nn:ss',Now());
         with QuerySaida do
