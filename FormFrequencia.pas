@@ -293,6 +293,7 @@ begin
   lblAviso3.Caption := '';
   lblData.Caption   := '';
   lblHora.Caption   := '';
+  foto.Picture      := nil;
 
   TimerLimpaTela.Enabled := false;
 end;

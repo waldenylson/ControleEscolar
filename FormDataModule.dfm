@@ -39,7 +39,6 @@ object frmDataModule: TfrmDataModule
     Left = 40
     Top = 112
     object tbAlunosid: TIntegerField
-      AutoGenerateValue = arAutoInc
       FieldName = 'id'
     end
     object tbAlunosturma_id: TIntegerField
@@ -57,38 +56,33 @@ object frmDataModule: TfrmDataModule
     end
     object tbAlunosrg: TStringField
       FieldName = 'rg'
-      Required = True
       Size = 255
     end
     object tbAlunosdata_nasc: TStringField
       FieldName = 'data_nasc'
-      Required = True
+      EditMask = '!99/99/0000;1;_'
       Size = 255
     end
     object tbAlunossexo: TStringField
       FieldName = 'sexo'
-      Required = True
       FixedChar = True
       Size = 1
     end
     object tbAlunosendereco: TStringField
       FieldName = 'endereco'
-      Required = True
       Size = 255
     end
     object tbAlunosbairro: TStringField
       FieldName = 'bairro'
-      Required = True
       Size = 255
     end
     object tbAlunoscidade: TStringField
       FieldName = 'cidade'
-      Required = True
       Size = 255
     end
     object tbAlunosfone: TStringField
       FieldName = 'fone'
-      Required = True
+      EditMask = '!\(99\)00009-0000;1;_'
       Size = 255
     end
     object tbAlunosfoto: TStringField

@@ -4,7 +4,7 @@ object frmPrincipal: TfrmPrincipal
   Hint = 'Configura'#231#245'es'
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'CFEscolar v1.0.0.10 - BETA'
+  Caption = 'CFEscolar v1.0.0.12 - BETA'
   ClientHeight = 207
   ClientWidth = 1087
   Color = clWindow

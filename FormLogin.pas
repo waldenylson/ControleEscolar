@@ -153,10 +153,10 @@ end;
 
 function TfrmLogin.verificaLogin: bool;
 begin
-  frmDataModule.tbUsuarios.Active := false;
+  frmDataModule.QueryLogin.Active := false;
 
   frmDataModule.QueryLogin.SQL.Clear;
-  frmDataModule.QueryLogin.SQL.Add('SELECT * FROM "usuario" u WHERE( (u."login" = :usuario) AND ("senha" = :senha) )');
+  frmDataModule.QueryLogin.SQL.Add('SELECT * FROM "usuario" u WHERE( (u."login" = :usuario) AND ("senha" = md5(:senha)) )');
   frmDataModule.QueryLogin.ParamByName('usuario').AsString := txtUser.Text;
   frmDataModule.QueryLogin.ParamByName('senha').AsString   := txtPass.Text;
   frmDataModule.QueryLogin.Active := true;

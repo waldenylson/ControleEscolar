@@ -22,18 +22,6 @@ type
     tbEmpresas: TUniTable;
     tbFeriados: TUniTable;
     MySQLProvider: TMySQLUniProvider;
-    tbAlunosid: TIntegerField;
-    tbAlunosturma_id: TIntegerField;
-    tbAlunosmatricula: TIntegerField;
-    tbAlunosnome: TStringField;
-    tbAlunosrg: TStringField;
-    tbAlunosdata_nasc: TStringField;
-    tbAlunossexo: TStringField;
-    tbAlunosendereco: TStringField;
-    tbAlunosbairro: TStringField;
-    tbAlunoscidade: TStringField;
-    tbAlunosfone: TStringField;
-    tbAlunosfoto: TStringField;
     tbTurmasid: TIntegerField;
     tbTurmasturma: TStringField;
     tbTurmasturno: TStringField;
@@ -69,6 +57,18 @@ type
     QueryAutoCompleteid: TIntegerField;
     QueryAutoCompletenome: TStringField;
     QueryAutoCompletematricula: TIntegerField;
+    tbAlunosid: TIntegerField;
+    tbAlunosturma_id: TIntegerField;
+    tbAlunosmatricula: TIntegerField;
+    tbAlunosnome: TStringField;
+    tbAlunosrg: TStringField;
+    tbAlunosdata_nasc: TStringField;
+    tbAlunossexo: TStringField;
+    tbAlunosendereco: TStringField;
+    tbAlunosbairro: TStringField;
+    tbAlunoscidade: TStringField;
+    tbAlunosfone: TStringField;
+    tbAlunosfoto: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure tbUsuariosAfterPost(DataSet: TDataSet);
     procedure tbUsuariosBeforePost(DataSet: TDataSet);
@@ -245,6 +245,9 @@ end;
 
 procedure TfrmDataModule.tbUsuariosBeforePost(DataSet: TDataSet);
 begin
+
+
+
   if tbUsuarios.State = dsInsert then
     semaforo := 1
   else semaforo := 0;

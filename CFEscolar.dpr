@@ -28,7 +28,6 @@ begin
 
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Turquoise Gray');
   Application.Title := '  CFEscolar ';
   Application.CreateForm(TfrmDataModule, frmDataModule);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
